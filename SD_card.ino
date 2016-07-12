@@ -6,7 +6,17 @@ int MIS_hr = 0;
 int MIS_min = 0;
 int MIS_sec = 0;
 String MIS_time = "00:00:00"; 
+
+int GPS_hr = 0;
+int GPS_min = 0;
+int GPS_sec = 0;
 //Serial_Event_Test_12 Variables End
+
+
+//variables not initialized
+float Pkg_Cum_Watts = 463.0f;
+float Total_avg_Watts = 23.3f;
+
 
 const int SD_pin = 53;
 
@@ -26,7 +36,19 @@ String SD_GPS_string = "";
 String SD_misc_file_name = "";
 String SD_misc_string = "";
 
+String Data_msg_string = "";
+
 int a = 1; //test line remember to remove it
+
+
+/*
+prepare data report to log in SD and sending HASP
+*/
+void prepare_report()
+{
+  String txt = "";
+  txt += "MISSION TIME: " + get_time_string(GPS_hr,GPS_min,GPS_sec)+"\tPkg Cum Wh\t" +Total_avg_Watts;
+}
 
 void setup() {
   // Setting up serial port
@@ -128,13 +150,7 @@ void log_sd()
 }
 
 
-/*
-prepare data report to log in SD and sending HASP
-*/
-void prepare_report()
-{
-  
-}
+
 
 
 void loop() {
